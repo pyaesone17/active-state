@@ -15,6 +15,7 @@ Basically we do like this.
 It would be nice if we can make shorter. right ?
 ```html
 <li class="sidebar {{ Active::check('post') }} ">Post</li>
+<li class="sidebar {{ Active::check('page') }} ">Post</li>
 ```
 
 #Installation
@@ -35,17 +36,17 @@ If the request match this url . It will return the default value from config fil
 ```php
 {{ Active::check('data') }} 
 ```
-Exact Check
+To check the exact url.
 ```php
 {{ Active::check('data') }} // check request is www.url.com/data
 ```
 
-If you want to check the url deeply , just pass the `true` value as second parameter.
+To check the url deeply , just pass the `true` value as second parameter.
 ```php
 {{ Active::check('data',true) }}  // check request is www.url.com/data || www.url.com/data/*
 ```
 
-If you want to change the return value in runtime, just pass the the third and fourth parameter.
+To change the return value in runtime, just pass the the third and fourth parameter.
 ```php
 {{ Active::check('data',true,'truth','fake') }} // it will override the value from config file.
 ```
@@ -58,10 +59,16 @@ Or you can even use helper function.
 You can even use this package for conditional displaying data.
 In some case, You need to render some part of template depends on request.
 
+```php
+
 @ifActiveUrl('data')
+
 	<p>Foo</p>
+
 @else
+	
 	<p>Bar</p>
+
 @endIfActiveUrl
 
-
+```
