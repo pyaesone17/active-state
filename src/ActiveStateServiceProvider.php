@@ -35,8 +35,8 @@ class ActiveStateServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('active-state', function ($app) {
-            return new \Pyaesone17\ActiveState\Active;
+        $this->app->singleton('active', function ($app) {
+            return new \Pyaesone17\ActiveState\Active();
         });
     }
 }
