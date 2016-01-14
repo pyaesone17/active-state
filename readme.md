@@ -72,3 +72,19 @@ In some case, You need to render some part of template depends on request.
 @endIfActiveUrl
 
 ```
+
+#Config
+
+You can configure the return value of active state.
+
+```php
+
+return [
+
+	// The default  value if the request match given action
+	'active_state'		=>	'active',
+	
+	// The default  value if the request match given action
+	'inactive_state'	=>	'no'
+
+];
