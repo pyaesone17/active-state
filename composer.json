@@ -1,6 +1,8 @@
 {
     "name": "pyaesone17/active-state",
     "description": "Active State Checker For Laravel Url",
+    "keywords": ["laracrud","laravel"],
+    "homepage": "https://github.com/pyaesone17/active-state",
     "authors": [
         {
             "name": "Pyae Sone Nyein",
