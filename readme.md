@@ -29,6 +29,23 @@ To publish configuration file
 php artisan vendor:publish
 ```
 
+Register Service Provider
+
+```
+	[
+	  	......,
+      	Pyaesone17\ActiveState\ActiveStateServiceProvider::class,
+
+    ],
+```
+
+Register Facade alias
+	[	
+		........,
+		'Active' => Pyaesone17\ActiveState\ActiveFacade::class,
+
+	]
+
 #Usage1
 
 It will check against  whether your request is `www.url.com/data`

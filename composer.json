@@ -18,7 +18,6 @@
             "src/helpers.php"
         ]
     },
-    "minimum-stability": "stable", 
     "license": "MIT"
 
 }
