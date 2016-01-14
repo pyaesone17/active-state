@@ -11,9 +11,9 @@
      *
      * @return string
      */
-     if (! function_exists('active_url')) {
+     if (! function_exists('active_check')) {
 
-     	function active_url($url,$deep=false,$active=null,$inactive=null)
+     	function active_check($url,$deep=false,$active=null,$inactive=null)
      	{
      		return app('active-state')->check($url, $deep, $active, $inactive);   	
           }
