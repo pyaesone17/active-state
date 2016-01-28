@@ -61,9 +61,7 @@ class Active
 
 	protected function setReturnValue($active,$inactive)
 	{
-		$this->activeValue   = ( $active == null ) ? $this->getActiveValue() : $active;
-		$this->inActiveValue = ( $inactive == null ) ? $this->getInActiveValue() : $inactive;
+		$this->activeValue   = ( $active === null ) ? $this->getActiveValue() : $active;
+		$this->inActiveValue = ( $inactive === null ) ? $this->getInActiveValue() : $inactive;
 	}
-
-
 }
