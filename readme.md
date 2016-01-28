@@ -58,9 +58,6 @@ To check the exact url.
 ```php
 {{ Active::check('data') }} // check request is www.url.com/data
 ```
-<<<<<<< HEAD
-If you want to check the exact url, just pass single parameter.
-=======
 
 To check the url deeply , just pass the `true` value as second parameter.
 ```php
@@ -68,7 +65,7 @@ To check the url deeply , just pass the `true` value as second parameter.
 ```
 
 To change the return value in runtime, just pass the the third and fourth parameter.
->>>>>>> 19f73e98426a6cc28990f12168cae75f05ab507d
+
 ```php
 {{ Active::check('data',true,'truth','fake') }} // it will override the value from config file.
 ```
