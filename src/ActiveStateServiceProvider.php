@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class ActiveStateServiceProvider extends ServiceProvider
 {
-    protected $defer = true;
     /**
      * Bootstrap the application services.
      *
@@ -35,7 +34,7 @@ class ActiveStateServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('active', function ($app) {
+        $this->app->singleton('active-state', function ($app) {
             return new \Pyaesone17\ActiveState\Active();
         });
     }
