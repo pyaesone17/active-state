@@ -17,7 +17,7 @@ class ActiveStateServiceProvider extends ServiceProvider
             return "<?php echo Active::check{$expression} ;  ?>";
         });
         \Blade::directive('ifActiveUrl', function($expression) {
-            return "<?php if(Active::check{$expression}): ?>";
+            return "<?php if(Active::checkBoolean{$expression}): ?>";
         });
         \Blade::directive('endIfActiveUrl', function($expression) {
             return '<?php endif; ?>';

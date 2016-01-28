@@ -38,14 +38,14 @@ Register Service Provider
 
     ],
 ```
-
+```
 Register Facade alias
 	[	
 		........,
 		'Active' => Pyaesone17\ActiveState\ActiveFacade::class,
 
 	]
-
+```
 #Usage1
 
 It will check against  whether your request is `www.url.com/data`

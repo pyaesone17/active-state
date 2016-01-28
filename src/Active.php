@@ -19,6 +19,15 @@ class Active
 		return $deep == true ? $this->checkActiveDeeply($url) : $this->checkActive($url);
 	}
 
+	/*
+	* It is the main entry point to check Url
+	*/ 
+	public function checkBoolean($url,$deep=false,$active=true,$inactive=false)
+	{
+		$this->setReturnValue($active,$inactive);
+		return $deep == true ? $this->checkActiveDeeply($url) : $this->checkActive($url);
+	}
+
 	/**
 	*	It checks the active state of given url deeply 
 	*	@param  string $url < url point to check >
