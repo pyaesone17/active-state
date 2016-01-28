@@ -15,10 +15,11 @@ php artisan vendor:publish
 #Usage
 It will check against  whether your request is `www.url.com/data`
 If the request match this url . It will return the default value from config file.
+The default value for true state is `"active"` and false is `"no"`. You can configure on active.php .
 ```php
 {{ \Active::check('data') }} 
 ```
-Exact Check
+If you want to check the exact url, just pass single parameter.
 ```php
 {{ \Active::check('data') }} // check request is www.url.com/data
 ```
