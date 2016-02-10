@@ -21,7 +21,7 @@ It would be nice if we can make shorter. right ?
 #Installation
 To install Package
 ```
-composer require pyaesone17/active-state
+composer require pyaesone17/active-state:0.0.2
 ```
 
 To publish configuration file
