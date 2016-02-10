@@ -86,7 +86,7 @@ In some case, You need to render some part of template depends on request.
 
 @else
 	
-	<p>Bar and Baz</p>
+	<p>Bar and Bazz</p>
 
 @endIfActiveUrl
 
