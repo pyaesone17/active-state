@@ -14,8 +14,8 @@ Basically we do like this.
 ```
 It would be nice if we can make shorter. right ?
 ```html
-<li class="sidebar {{ Active::check('post') }} ">Post</li>
-<li class="sidebar {{ Active::check('page') }} ">Post</li>
+<li class="sidebar {{ active_check('post') }} ">Post</li>
+<li class="sidebar {{ active_check('page') }} ">Page</li>
 ```
 
 #Installation
