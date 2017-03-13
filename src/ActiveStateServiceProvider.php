@@ -24,7 +24,7 @@ class ActiveStateServiceProvider extends ServiceProvider
         });
         $this->publishes([
             __DIR__.'/config/active.php' => config_path('active.php'),
-        ]);        
+        ], 'config');        
     }
 
     /**
@@ -37,5 +37,8 @@ class ActiveStateServiceProvider extends ServiceProvider
         $this->app->singleton('active-state', function ($app) {
             return new \Pyaesone17\ActiveState\Active();
         });
+        $this->mergeConfigFrom(
+        __DIR__.'/config/active.php', 'active'
+    );
     }
 }
