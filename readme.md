@@ -21,7 +21,7 @@ It would be nice if we can make shorter. right ?
 ## Installation
 Install with `composer`:
 ```
-composer require pyaesone17/active-state:0.0.2
+composer require pyaesone17/active-state:^0.0.2
 ```
 
 And add the service provider in `config/app.php`
@@ -43,7 +43,7 @@ If you want to use the facade, add this to your facades in `config/app.php`
 ```
 To publish configuration file
 ```
-php artisan vendor:publish --provider="Pyaesone17\ActiveState\ActiveStateServiceProvide"
+php artisan vendor:publish --provider="Pyaesone17\ActiveState\ActiveStateServiceProvider"
 ```
 
 ## Usage
