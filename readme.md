@@ -66,10 +66,10 @@ To check the url deeply , just pass the `true` value as second parameter.
 ```
 OR
 ```blade
-{{ Active::check(['data','post','categories']) }}  // check request is www.url.com/data or www.url.com/post or www.url.com/categories
+{{ Active::check(['data','post','categories']) }}  // check request is www.url.com/data || www.url.com/post || www.url.com/categories
 ```
 ```blade
-{{ Active::check(['data','post','categories'],true) }} // check request is www.url.com/data/* or // check request is www.url.com/post/* or www.url.com/categories/*
+{{ Active::check(['data','post','categories'],true) }} // check request is www.url.com/data/* || // check request is www.url.com/post/* || www.url.com/categories/*
 ```
 
 To change the return value in runtime, just pass the the third and fourth parameter.
