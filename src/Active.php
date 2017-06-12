@@ -35,7 +35,12 @@ class Active
 	*/
 	protected function checkActiveDeeply($url)
 	{
-		return Request::is($url) || Request::is($url.'/*') ? $this->activeValue : $this->inActiveValue; 
+		if(is_array($url)) {
+            foreach ($url as $value) { $urls[] = $value.'*'; }
+            return call_user_func_array('Request::is', $urls) ? $this->activeValue : $this->inActiveValue;
+        }else {
+            return Request::is($url) || Request::is($url . '/*') ? $this->activeValue : $this->inActiveValue;
+        }
 	}
 
 	/**
@@ -45,7 +50,10 @@ class Active
 	*/
 	protected function checkActive($url)
 	{
-		return Request::is($url) ? $this->activeValue : $this->inActiveValue; 
+		if(is_array($url))
+            return call_user_func_array('Request::is', $url) ? $this->activeValue : $this->inActiveValue;
+        else
+		    return Request::is($url) ? $this->activeValue : $this->inActiveValue;
 	}
 
 	protected function getActiveValue()

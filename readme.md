@@ -64,6 +64,13 @@ To check the url deeply , just pass the `true` value as second parameter.
 ```blade
 {{ Active::check('data',true) }}  // check request is www.url.com/data || www.url.com/data/*
 ```
+OR
+```blade
+{{ Active::check(['data','post','categories']) }}  // check request is www.url.com/data || www.url.com/post || www.url.com/categories
+```
+```blade
+{{ Active::check(['data','post','categories'],true) }} // check request is www.url.com/data/* || // check request is www.url.com/post/* || www.url.com/categories/*
+```
 
 To change the return value in runtime, just pass the the third and fourth parameter.
 
@@ -95,9 +102,9 @@ You can configure the return value of active state.
 return [
 
     // The default  value if the request match given action
-    'active_state'		=>	'active',
+    'active_state'      =>  'active',
 
     // The default  value if the request match given action
-    'inactive_state'	=>	'no'
+    'inactive_state'    =>  'no'
 
 ];
