@@ -103,11 +103,11 @@ In some case, You need to render some part of template depends on request.
 
 To check the route name is.
 ```blade
-{{ Active::checkRoute('users.index') }} // check request is www.url.com/users
+{{ Active::checkRoute('users.index') }} // check request url route name is "users.index"
 ```
 OR
 ```blade
-{{ Active::checkRoute(['users.index','users.show']) }} // check request is www.url.com/users or www.url.com/users/1
+{{ Active::checkRoute(['users.index','users.show']) }} // check request url route name is "users.index" or "users.show"
 ```
 
 Ofcousre you may change the return value in runtime as second and third params.
