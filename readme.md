@@ -156,6 +156,8 @@ Yes it is also avaialable in blade.
     <p>Bar and Bazz</p>
 @endIfActiveQuery
 ```
+## Notes
+Everytime u update package, you have to run "php artisan view:clear" for blade directives.
 
 ## Configuration
 
