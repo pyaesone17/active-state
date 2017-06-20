@@ -119,6 +119,11 @@ OR
 {{ Active::checkRoute(['users.index','users.show'],'routeIsActive','routeNotActive') }} 
 ```
 
+For helper function.
+```blade
+{{ active_route('users.index') }} 
+```
+
 Yes it is also avaialable in blade.
 
 ```blade
@@ -127,6 +132,7 @@ Yes it is also avaialable in blade.
 @else
     <p>Bar and Bazz</p>
 @endIfActiveRoute
+
 ```
 
 To check the url with the exact same query paramter value.
@@ -145,6 +151,11 @@ Ofcousre you may change the return value in runtime as second and third params.
 OR
 ```blade
 {{ Active::checkQuery(['users?gender=male','users?status=married'],'male or married','nothing') }} 
+```
+
+For helper function.
+```blade
+{{ active_query('users?gender=male') }} 
 ```
 
 Yes it is also avaialable in blade.
