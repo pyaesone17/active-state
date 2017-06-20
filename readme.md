@@ -20,6 +20,12 @@ It would be nice if we can make shorter. right ?
 
 ## Installation
 Install with `composer`:
+
+Laravel 5.4 and above
+```
+composer require pyaesone17/active-state:^1.1.0
+```
+Laravel 5.3 and below
 ```
 composer require pyaesone17/active-state:^0.0.2
 ```
