@@ -21,7 +21,7 @@ class Active
     public function check($url,$deep=false,$active=null,$inactive=null)
     {
         $this->setReturnValue($active,$inactive);
-        return $deep == true ? $this->checkActiveDeeply($url) : $this->checkActive($url);
+        return $deep == true ? $this->checkActiveDeeply($url,'is') : $this->checkActive($url,'is');
     }
 
     /*
@@ -30,7 +30,7 @@ class Active
     public function checkBoolean($url,$deep=false,$active=true,$inactive=false)
     {
         $this->setReturnValue($active,$inactive);
-        return $deep == true ? $this->checkActiveDeeply($url) : $this->checkActive($url);
+        return $deep == true ? $this->checkActiveDeeply($url,'is') : $this->checkActive($url,'is');
     }
 
     /*
@@ -39,7 +39,17 @@ class Active
     public function checkRoute($route,$active=null,$inactive=null)
     {
         $this->setReturnValue($active,$inactive);
-        return $this->request->routeIs($route) ? $this->activeValue : $this->inActiveValue;
+
+        if (is_array($route)) {
+            foreach ($route as $r) {
+                if ($this->checkRouteBoolean($r)) {
+                    return $this->activeValue;
+                }
+            }
+            return $this->inActiveValue;
+        }
+
+        return $this->checkActive($route,'routeIs');
     }
 
     /*
@@ -47,6 +57,14 @@ class Active
     */ 
     public function checkRouteBoolean($route)
     {
+        if (is_array($route)) {
+            foreach ($route as $r) {
+                if ($this->request->routeIs($r)) {
+                    return true;
+                }
+            }
+            return false;
+        }
         return $this->request->routeIs($route);
     }
 
@@ -55,13 +73,23 @@ class Active
     */ 
     public function checkQuery($fullUrlWithQuery,$active=null,$inactive=null)
     {
+        $this->setReturnValue($active,$inactive);
+
+        if (is_array($fullUrlWithQuery)) {
+            foreach ($fullUrlWithQuery as $f) {
+                $f = url($f);
+                if ($this->checkQueryBoolean($f)) {
+                    return $this->activeValue;
+                }
+            }
+            return $this->inActiveValue;
+        }
+
         // Here we have to transform to domain base full query
         // Since fullUrlIs also check domain name, if we dont transform here
         // User have to type those lenghty domain name
         $fullUrlWithQuery = url($fullUrlWithQuery);
-
-        $this->setReturnValue($active,$inactive);
-        return $this->request->fullUrlIs($fullUrlWithQuery) ? $this->activeValue : $this->inActiveValue;
+        return $this->checkActive($route,'fullUrlIs');
     }
 
     /*
@@ -69,6 +97,15 @@ class Active
     */ 
     public function checkQueryBoolean($fullUrlWithQuery)
     {
+        if (is_array($fullUrlWithQuery)) {
+            foreach ($fullUrlWithQuery as $f) {
+                $f = url($f);
+                if ($this->request->fullUrlIs($f)) {
+                    return true;
+                }
+            }
+            return false;
+        }
         $fullUrlWithQuery = url($fullUrlWithQuery);
         return $this->request->fullUrlIs($fullUrlWithQuery);
     }
@@ -78,19 +115,27 @@ class Active
     *   @param  string $url < url point to check >
     *   @return string it returns wherether the state is active or no 
     */
-    protected function checkActiveDeeply($url)
+    protected function checkActiveDeeply($url,$method)
     {
-        return $this->request->is($url) || $this->request->is($url.'/*') ? $this->activeValue : $this->inActiveValue; 
+        if(is_array($url)) {
+            foreach ($url as $value) { $urls[] = $value.'*'; }
+            return call_user_func_array(array($this->request,$method), $urls) ? $this->activeValue : $this->inActiveValue;
+        } else {
+            return $this->request->is($url) || $this->request->is($url . '/*') ? $this->activeValue : $this->inActiveValue;
+        }
     }
-
     /**
     *   It checks the active state of given url specificly  
     *   @param  string $url < url point to check >
     *   @return string it returns wherether the state is active or no 
     */
-    protected function checkActive($url)
+    protected function checkActive($url,$method)
     {
-        return $this->request->is($url) ? $this->activeValue : $this->inActiveValue; 
+        if(is_array($url)){
+            return call_user_func_array(array($this->request,$method), $url) ? $this->activeValue : $this->inActiveValue;
+        } else{
+            return $this->request->{$method}($url) ? $this->activeValue : $this->inActiveValue;
+        }
     }
 
     protected function getActiveValue()
