@@ -23,7 +23,7 @@ Install with `composer`:
 
 Laravel 5.4 and above
 ```
-composer require pyaesone17/active-state:^1.1.0
+composer require pyaesone17/active-state:^1.1.1
 ```
 Laravel 5.3 and below
 ```
@@ -87,7 +87,6 @@ Or you can even use helper function.
 ```blade
 {{ active_check('data') }}
 ```
-
 You can also use this package for conditional displaying data.
 In some case, You need to render some part of template depends on request.
 
@@ -98,6 +97,64 @@ In some case, You need to render some part of template depends on request.
     <p>Bar and Bazz</p>
 @endIfActiveUrl
 
+```
+
+## Advance Usage and Above version 1.1.1
+
+To check the route name is.
+```blade
+{{ Active::checkRoute('users.index') }} // check request is www.url.com/users
+```
+OR
+```blade
+{{ Active::checkRoute(['users.index','users.show']) }} // check request is www.url.com/users or www.url.com/users/1
+```
+
+Ofcousre you may change the return value in runtime as second and third params.
+```blade
+{{ Active::checkRoute('users.index','routeIsActive','routeNotActive') }} 
+```
+OR
+```blade
+{{ Active::checkRoute(['users.index','users.show'],'routeIsActive','routeNotActive') }} 
+```
+
+Yes it is also avaialable in blade.
+
+```blade
+@ifActiveRoute('users.index')
+    <p>Foo</p>
+@else
+    <p>Bar and Bazz</p>
+@endIfActiveRoute
+```
+
+To check the url with the exact same query paramter value.
+```blade
+{{ Active::checkQuery('users?gender=male') }} // check request is www.url.com/users?gender=male
+```
+OR
+```blade
+{{ Active::checkQuery(['users?gender=male','users?status=married']) }} // check request is www.url.com/users?gender=male or www.url.com/users?status=married
+```
+
+Ofcousre you may change the return value in runtime as second and third params.
+```blade
+{{ Active::checkQuery(['users?gender=male','itIsMale','Ah it is wonder woman') }} 
+```
+OR
+```blade
+{{ Active::checkQuery(['users?gender=male','users?status=married'],'male or married','nothing') }} 
+```
+
+Yes it is also avaialable in blade.
+
+```blade
+@ifActiveQuery(['users?gender=male','users?status=married'])
+    <p>Foo</p>
+@else
+    <p>Bar and Bazz</p>
+@endIfActiveQuery
 ```
 
 ## Configuration
