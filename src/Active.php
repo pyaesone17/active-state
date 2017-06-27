@@ -1,6 +1,6 @@
 <?php
 namespace Pyaesone17\ActiveState;
-
+use Illuminate\Support\Str;
 use Request;
 /**
 * Active state check for laravel
@@ -41,15 +41,12 @@ class Active
         $this->setReturnValue($active,$inactive);
 
         if (is_array($route)) {
-            foreach ($route as $r) {
-                if ($this->checkRouteBoolean($r)) {
-                    return $this->activeValue;
-                }
-            }
-            return $this->inActiveValue;
+            $result = call_user_func_array(array($this,'routeIsDeeply'), $route);
+        } else {
+            $result = $this->routeIsDeeply($route);   
         }
 
-        return $this->checkActive($route,'routeIs');
+        return $result ? $this->activeValue : $this->inActiveValue;
     }
 
     /*
@@ -58,14 +55,11 @@ class Active
     public function checkRouteBoolean($route)
     {
         if (is_array($route)) {
-            foreach ($route as $r) {
-                if ($this->request->routeIs($r)) {
-                    return true;
-                }
-            }
-            return false;
+            $result = call_user_func_array(array($this,'routeIsDeeply'), $route);
+        } else {
+            $result = $this->routeIsDeeply($route);   
         }
-        return $this->request->routeIs($route);
+        return $result;
     }
 
     /*
@@ -76,20 +70,12 @@ class Active
         $this->setReturnValue($active,$inactive);
 
         if (is_array($fullUrlWithQuery)) {
-            foreach ($fullUrlWithQuery as $f) {
-                $f = url($f);
-                if ($this->checkQueryBoolean($f)) {
-                    return $this->activeValue;
-                }
-            }
-            return $this->inActiveValue;
+            $result = call_user_func_array(array($this,'queryIsDeeply'), $fullUrlWithQuery);
+        } else {
+            $result = $this->queryIsDeeply($fullUrlWithQuery);   
         }
 
-        // Here we have to transform to domain base full query
-        // Since fullUrlIs also check domain name, if we dont transform here
-        // User have to type those lenghty domain name
-        $fullUrlWithQuery = url($fullUrlWithQuery);
-        return $this->checkActive($route,'fullUrlIs');
+        return $result ? $this->activeValue : $this->inActiveValue;
     }
 
     /*
@@ -98,16 +84,11 @@ class Active
     public function checkQueryBoolean($fullUrlWithQuery)
     {
         if (is_array($fullUrlWithQuery)) {
-            foreach ($fullUrlWithQuery as $f) {
-                $f = url($f);
-                if ($this->request->fullUrlIs($f)) {
-                    return true;
-                }
-            }
-            return false;
+            $result = call_user_func_array(array($this,'queryIsDeeply'), $fullUrlWithQuery);
+        } else {
+            $result = $this->queryIsDeeply($fullUrlWithQuery);   
         }
-        $fullUrlWithQuery = url($fullUrlWithQuery);
-        return $this->request->fullUrlIs($fullUrlWithQuery);
+        return $result;
     }
 
     /**
@@ -154,5 +135,26 @@ class Active
     {
         $this->activeValue   = ( $active === null ) ? $this->getActiveValue() : $active;
         $this->inActiveValue = ( $inactive === null ) ? $this->getInActiveValue() : $inactive;
+    }
+
+    protected function queryIsDeeply() 
+    {
+        foreach (func_get_args() as $f) {
+            $f = url($f);
+            if ($this->request->fullUrlIs($f)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected function routeIsDeeply() 
+    {
+        foreach (func_get_args() as $r) {
+            if (Str::is($r,$this->request->route()->getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
