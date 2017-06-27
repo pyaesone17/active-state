@@ -105,9 +105,15 @@ To check the route name is.
 ```blade
 {{ Active::checkRoute('users.index') }} // check request url route name is "users.index"
 ```
+
 OR
 ```blade
-{{ Active::checkRoute(['users.index','users.show']) }} // check request url route name is "users.index" or "users.show"
+{{ Active::checkRoute(['users.index','users.show', 'users.edit']) }} // check request url route name is "users.index" or "users.show" or "users.edit"
+```
+
+Sometimes passing multiple routename as parameters is cubersome. You can simple do like this
+```blade
+{{ Active::checkRoute('users.*') }} 
 ```
 
 Ofcousre you may change the return value in runtime as second and third params.
@@ -121,7 +127,7 @@ OR
 
 For helper function.
 ```blade
-{{ active_route('users.index') }} 
+{{ active_route('users.comments.*') }} 
 ```
 
 Yes it is also avaialable in blade.
