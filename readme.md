@@ -1,5 +1,10 @@
 # Active State
 
+[![Total Downloads](https://poser.pugx.org/pyaesone17/active-state/downloads)](https://packagist.org/packages/pyaesone17/active-state)
+[![License](https://poser.pugx.org/pyaesone17/active-state/license)](https://packagist.org/packages/pyaesone17/active-state)
+[![Latest Stable Version](https://poser.pugx.org/pyaesone17/active-state/v/stable)](https://packagist.org/packages/pyaesone17/active-state)
+[![Monthly Downloads](https://poser.pugx.org/pyaesone17/active-state/d/monthly)](https://packagist.org/packages/pyaesone17/active-state)
+
 > Simple Laravel Active Checker For Request Url
 
 Sometimes you want to check the request url is active or not For the following purpose.
