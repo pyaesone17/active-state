@@ -18,6 +18,15 @@
             "src/helpers.php"
         ]
     },
-    "license": "MIT"
-
+    "license": "MIT",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pyaesone17\\ActiveState\\ActiveStateServiceProvider"
+            ],
+            "aliases": {
+                "Active": "Pyaesone17\\ActiveState\\ActiveFacade"
+            }
+        }
+    }
 }
