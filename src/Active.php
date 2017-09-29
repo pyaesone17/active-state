@@ -150,6 +150,10 @@ class Active
 
     protected function routeIsDeeply() 
     {
+        if ($this->request->route()===null) {
+            return false;
+        }
+        
         foreach (func_get_args() as $r) {
             if (Str::is($r,$this->request->route()->getName())) {
                 return true;
